@@ -1,3 +1,4 @@
+# GitHub Start
 github.com
 www.github.com
 api.github.com
@@ -30,3 +31,72 @@ avatars8.githubusercontent.com
 user-images.githubusercontent.com
 repository-images.githubusercontent.com
 marketplace-screenshots.githubusercontent.com
+# GitHub End
+
+# GoogleHosts Start
+ss-3.googlehosts.org
+204-44-66-78.googlehosts.org
+tg-1.googlehosts.org
+ss-3.googlehosts.org
+googlehosts.org
+# GoogleHosts End
+
+# Android Start
+a.android.com
+connectivitycheck.android.com
+d.android.com
+dev.android.com
+market.android.com
+r.android.com
+android.com
+www.android.com
+source.android.com
+developer.android.com
+# Android End
+
+# Apkpure Start
+apkpure.com
+m.apkpure.com
+# Apkpure End
+
+# Apkmirror Start
+www.apkmirror.com
+# Apkmirror End
+
+# Fastly Start
+codeproject.global.ssl.fastly.net
+github.global.ssl.fastly.net
+freetls.fastly.net
+aosc-repo.freetls.fastly.net
+bt-wpstatic.freetls.fastly.net
+chairish-prod.freetls.fastly.net
+codeproject.freetls.fastly.net
+finanzen.freetls.fastly.net
+github-atom-io-herokuapp-com.freetls.fastly.net
+gl-canary.freetls.fastly.net
+grokker-static.freetls.fastly.net
+images-production.freetls.fastly.net
+img-mdpr.freetls.fastly.net
+lakvod-508179.freetls.fastly.net
+oldies-cdn.freetls.fastly.net
+prehistory101.freetls.fastly.net
+tampermonkey.freetls.fastly.net
+villagevoice.freetls.fastly.net
+zcdn.freetls.fastly.net
+herokudata-frontend.freetls.fastly.net
+# Fastly End
+
+# Gmail Start
+gmail.com
+www.gmail.com
+googlemail.l.google.com
+mail-settings.google.com
+m.gmail.com
+m.googlemail.com
+gmail.google.com
+mail.google.com
+inbox.google.com
+chatenabled.mail.google.com
+filetransferenabled.mail.google.com
+isolated.mail.google.com
+# Gmail End

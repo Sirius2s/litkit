@@ -5,7 +5,7 @@ name: GetHosts
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 0 1 * *'
+    - cron: '10 0 1 * *'
   # watch:
   #   types: started
   repository_dispatch:
@@ -28,19 +28,15 @@ jobs:
         run: pip install -r ./requirements.txt 
         
       - name: 'GetHosts' 
-        run: |
-          ls ./gethosts/* # debug
-          python3 ./gethosts/get_hosts.py
+        run: python3 ./gethosts/get_hosts.py
         env:
             PUSH_KEY: ${{ secrets.PUSH_KEY }}
 
       - name: commit
         run: |
-          ls ./gethosts/* # debug
-          cat ./gethosts/hosts.txt  # debug
           git config --global user.email ${{ secrets.EMAIL }}
           git config --global user.name github.event.GITHUB_REPOSITORY_OWNER
-          git add -A
+          git add .
           git commit -m "update hosts" -a || echo "Nothing to update"
       
       - name: Push changes
