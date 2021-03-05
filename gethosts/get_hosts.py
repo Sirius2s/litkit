@@ -25,6 +25,7 @@ def main():
             ip=get_ip(host.strip())
             with open('gethosts/hosts.txt', 'a') as result:
                 result.write(ip.strip('\n') + " " + host)
+                print(ip.strip('\n') + " " + host)  # debug
 
     f = open('gethosts/hosts.txt','a')
     f.write("\n# GitHub End\n")
