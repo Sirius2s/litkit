@@ -1,15 +1,15 @@
 # This is a basic workflow to help you get started with Actions
 
-name: GetHosts
+name: SynTime
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '0 0 1 * *'
+  # schedule:
+  #   - cron: '5 7 * * *'    # |10 7 * * *| #|符号间是预期utc+0执行时点
   # watch:
   #   types: started
   repository_dispatch:
-    types: GetHosts
+    types: SynTime
 
 jobs:
   build:
@@ -27,17 +27,17 @@ jobs:
       - name: 'Install requirements'
         run: pip install -r ./requirements.txt 
         
-      - name: 'GetHosts' 
-        run: python3 ./gethosts/get_hosts.py 
+      - name: 'SynTime' 
+        run: python3 SynTime.py 
         env:
             PUSH_KEY: ${{ secrets.PUSH_KEY }}
 
       - name: commit
         run: |
           git config --global user.email ${{ secrets.EMAIL }}
-          git config --global user.name ${{ github.GITHUB_REPOSITORY_OWNER }}
+          git config --global user.name ${{ secrets.USER_NAME }}
           git add .
-          git commit -m "update hosts" -a || echo "Nothing to update"
+          git commit -m "update cron" -a || echo "Nothing to update"
       
       - name: Push changes
         uses: ad-m/github-push-action@master
