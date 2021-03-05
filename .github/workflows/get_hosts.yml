@@ -35,7 +35,7 @@ jobs:
       - name: commit
         run: |
           git config --global user.email ${{ secrets.EMAIL }}
-          git config --global user.name ${{ github.GITHUB_REPOSITORY_OWNER }}
+          git config --global user.name github.event.GITHUB_REPOSITORY_OWNER
           git add .
           git commit -m "update hosts" -a || echo "Nothing to update"
       
