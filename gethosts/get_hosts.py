@@ -10,6 +10,7 @@ def get_ip(host):
         return host_ip
     except:
         print("Unable to get IP of Hostname")
+        return False
 
 
 def main():
@@ -24,8 +25,9 @@ def main():
                     continue
 
             ip = get_ip(host.strip())
-            with open('./gethosts/hosts.txt', 'a') as result:
-                result.write(ip.strip('\n') + "\t" + host)
+            if ip:
+                with open('./gethosts/hosts.txt', 'a') as result:
+                    result.write(ip.strip('\n') + "\t" + host)
 
 
 if __name__ == "__main__":
