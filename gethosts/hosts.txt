@@ -1,36 +1,36 @@
 # GitHub Start
-140.82.114.4	github.com
-140.82.112.3	www.github.com
-140.82.112.5	api.github.com
-185.199.108.133	raw.github.com
-140.82.114.4	gist.github.com
-185.199.110.154	help.github.com
+140.82.121.3	github.com
+140.82.121.3	www.github.com
+140.82.121.5	api.github.com
+185.199.110.133	raw.github.com
+140.82.113.3	gist.github.com
+185.199.108.154	help.github.com
 185.199.109.153	githubstatus.com
 140.82.112.9	nodeload.github.com
 140.82.112.9	codeload.github.com
-185.199.111.153	training.github.com
-185.199.110.153	assets-cdn.github.com
-185.199.110.154	github.githubassets.com
-185.199.111.153	documentcloud.github.com
-185.199.108.133	raw.githubusercontent.com
+185.199.108.153	training.github.com
+185.199.108.153	assets-cdn.github.com
+185.199.109.154	github.githubassets.com
+185.199.108.153	documentcloud.github.com
+185.199.110.133	raw.githubusercontent.com
 185.199.108.133	camo.githubusercontent.com
-185.199.111.133	gist.githubusercontent.com
+185.199.108.133	gist.githubusercontent.com
 185.199.108.133	cloud.githubusercontent.com
 151.101.249.194	github.global.ssl.fastly.net
 185.199.108.133	desktop.githubusercontent.com
-185.199.109.133	avatars.githubusercontent.com
+185.199.108.133	avatars.githubusercontent.com
 185.199.108.133	avatars0.githubusercontent.com
 185.199.108.133	avatars1.githubusercontent.com
-185.199.110.133	avatars2.githubusercontent.com
-185.199.109.133	avatars3.githubusercontent.com
+185.199.108.133	avatars2.githubusercontent.com
+185.199.108.133	avatars3.githubusercontent.com
 185.199.108.133	avatars4.githubusercontent.com
 185.199.108.133	avatars5.githubusercontent.com
 185.199.108.133	avatars6.githubusercontent.com
 185.199.108.133	avatars7.githubusercontent.com
 185.199.108.133	avatars8.githubusercontent.com
-185.199.108.133	user-images.githubusercontent.com
-185.199.109.133	repository-images.githubusercontent.com
-185.199.108.133	marketplace-screenshots.githubusercontent.com
+185.199.109.133	user-images.githubusercontent.com
+185.199.108.133	repository-images.githubusercontent.com
+185.199.109.133	marketplace-screenshots.githubusercontent.com
 # GitHub End
 
 # GoogleHosts Start
@@ -38,25 +38,25 @@
 # GoogleHosts End
 
 # Android Start
-142.250.65.78	a.android.com
-172.217.8.14	connectivitycheck.android.com
-142.250.65.78	d.android.com
-142.250.73.206	dev.android.com
-172.217.7.206	market.android.com
-172.217.13.78	r.android.com
-172.253.62.105	android.com
-172.217.13.78	www.android.com
-172.217.7.238	source.android.com
-172.217.12.238	developer.android.com
+172.217.9.206	a.android.com
+172.217.7.238	connectivitycheck.android.com
+142.250.73.238	d.android.com
+172.217.15.110	dev.android.com
+142.250.73.238	market.android.com
+172.217.15.110	r.android.com
+172.217.13.68	android.com
+172.217.2.110	www.android.com
+172.217.8.14	source.android.com
+142.250.65.78	developer.android.com
 # Android End
 
 # Apkpure Start
-104.20.82.194	apkpure.com
+104.20.83.194	apkpure.com
 172.67.1.139	m.apkpure.com
 # Apkpure End
 
 # Apkmirror Start
-104.19.135.58	www.apkmirror.com
+104.19.133.58	www.apkmirror.com
 # Apkmirror End
 
 # Fastly Start
@@ -66,33 +66,33 @@
 151.101.210.79	aosc-repo.freetls.fastly.net
 151.101.250.79	bt-wpstatic.freetls.fastly.net
 151.101.210.79	chairish-prod.freetls.fastly.net
-151.101.250.79	codeproject.freetls.fastly.net
-151.101.210.79	finanzen.freetls.fastly.net
+151.101.210.79	codeproject.freetls.fastly.net
+151.101.250.79	finanzen.freetls.fastly.net
 151.101.250.79	github-atom-io-herokuapp-com.freetls.fastly.net
 151.101.210.79	gl-canary.freetls.fastly.net
-151.101.250.79	grokker-static.freetls.fastly.net
+151.101.210.79	grokker-static.freetls.fastly.net
 151.101.250.79	images-production.freetls.fastly.net
 151.101.250.79	img-mdpr.freetls.fastly.net
 151.101.210.79	lakvod-508179.freetls.fastly.net
 151.101.210.79	oldies-cdn.freetls.fastly.net
-151.101.210.79	prehistory101.freetls.fastly.net
+151.101.250.79	prehistory101.freetls.fastly.net
 151.101.250.79	tampermonkey.freetls.fastly.net
 151.101.210.79	villagevoice.freetls.fastly.net
-151.101.210.79	zcdn.freetls.fastly.net
-151.101.210.79	herokudata-frontend.freetls.fastly.net
+151.101.250.79	zcdn.freetls.fastly.net
+151.101.250.79	herokudata-frontend.freetls.fastly.net
 # Fastly End
 
 # Gmail Start
-172.217.15.101	gmail.com
-172.217.5.229	www.gmail.com
-172.217.5.229	googlemail.l.google.com
-172.217.164.167	mail-settings.google.com
-172.217.164.133	m.gmail.com
-172.217.164.133	m.googlemail.com
-142.250.73.206	gmail.google.com
-172.217.164.133	mail.google.com
-172.217.9.197	inbox.google.com
-172.217.7.135	chatenabled.mail.google.com
-172.217.7.199	filetransferenabled.mail.google.com
-172.217.7.199	isolated.mail.google.com
+142.250.73.197	gmail.com
+172.217.13.229	www.gmail.com
+172.217.13.229	googlemail.l.google.com
+172.217.13.231	mail-settings.google.com
+172.217.13.229	m.gmail.com
+172.217.7.229	m.googlemail.com
+172.217.164.174	gmail.google.com
+172.217.7.229	mail.google.com
+172.217.13.229	inbox.google.com
+172.217.15.103	chatenabled.mail.google.com
+172.217.13.71	filetransferenabled.mail.google.com
+172.217.5.231	isolated.mail.google.com
 # Gmail End
