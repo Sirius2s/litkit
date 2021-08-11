@@ -15,6 +15,7 @@ needYou2Know = 1   # [0,1,2]  0:不通知     1:server酱      2:SMTP邮件服�
 SCKEY = ''        # Server酱的SCKEY
 QQ_SKEY = ''    # CoolPush的KEY
 QYWX_AM = ''    # 企业微信应用的KEY
+QMSG_KEY = ''  # QMSG的KEY
 
 # email_dict = {
 #     "sender": '',                 # ① sender是邮件发送人邮箱
@@ -180,17 +181,40 @@ def qywxamNotify(title, content):
 
     print(response.text)
 
+def QMSG(title, content):
+    """QMSG服务"""
+    qmsgkey = QMSG_KEY
+    if "QMSG_KEY" in os.environ:
+        """
+        判断是否运行自GitHub action,"QMSG_KEY" 该参数与 repo里的Secrets的名称保持一致
+        """
+        qmsgkey = os.environ["QMSG_KEY"]
+
+    if not qmsgkey:
+        print("QMSG服务的QMSG_KEY未设置!!\n取消推送")
+        return
+    print("QMSG服务启动")
+    # data = f"{title}\n\n{content}"
+    data = {
+    #     'msg': '标题:{}\n内容:{}'.format(title, content)
+        'msg': f"{title}\n\n{content}"
+    }
+    response = requests.post(f"https://qmsg.zendee.cn/send/{qmsgkey}", data=data) #data=data.encode("utf-8"))
+    print(response.text)
+    # print(os.environ.values)
 
 notify = [n0, serverJ][needYou2Know]
 notify_CoolPush = [n0, CoolPush][needYou2Know]
 notify_QW_AM = [n0, qywxamNotify][needYou2Know]
+notify_QMSG = [n0, QMSG][needYou2Know]
 
 if __name__ == "__main__":
     print("通知服务测试")
     start = time.time()
     # notify("脚本通知服务", "needYou2Know\n\n通知服务测试")
     # notify_CoolPush("脚本通知服务", "needYou2Know\n\n通知服务测试")
-    url = f"{os.environ['GITHUB_SERVER_URL']}/{os.environ['GITHUB_REPOSITORY']}/actions/runs/{os.environ['GITHUB_RUN_ID']}?check_suite_focus=true"
-    notify_QW_AM("脚本通知服务", url)
+    # url = f"{os.environ['GITHUB_SERVER_URL']}/{os.environ['GITHUB_REPOSITORY']}/actions/runs/{os.environ['GITHUB_RUN_ID']}?check_suite_focus=true"
+    # notify_QW_AM("脚本通知服务", url)
+    notify_QMSG("脚本通知服务", "needYou2Know\n\n通知服务测试")
     # notify_QW_AM("脚本通知服务", "needYou2Know\n\n通知服务测试")
     print("耗时: ", time.time()-start, "s")
