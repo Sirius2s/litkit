@@ -262,7 +262,8 @@ def watcher():
             json_fs = json.load(focus)
     except Exception as e:
         # print("本地读取异常:%s" % e)
-        url_fs = "https://raw.githubusercontent.com/Sirius2s/litkit/main/dumpcart/focus.json"
+        # url_fs = "https://raw.githubusercontent.com/Sirius2s/litkit/main/dumpcart/focus.json"
+        url_fs = 'https://cdn.jsdelivr.net/gh/sirius2s/litkit@main/dumpcart/focus.json'
 
         res = req(url_fs, None, None, 'focus')
         if res == False:
