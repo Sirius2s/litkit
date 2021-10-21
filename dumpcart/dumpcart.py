@@ -1,4 +1,3 @@
-from numpy.core.numeric import convolve
 import requests
 import json
 import re
