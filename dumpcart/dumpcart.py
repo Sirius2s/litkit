@@ -114,15 +114,25 @@ def get_gz(fundCode):
         jzrq: 净值日期date
         name: 
     """
-    url_gz = 'http://api.fund.eastmoney.com/fund/fundgz'
+    url_rt = 'https://buy.vmall.com/getSkuRushbuyInfo.json'
+    res_rt = requests.get(url_rt)
+    rt = res_rt.json()['currentTime']
+
+    url_gz = f'http://fundgz.1234567.com.cn/js/{fundCode}.js'
     param_gz = {
-        'fundCode': fundCode
+        'rt': rt
     }
     res_gz = req(url_gz, param_gz, header, 'gz')
     if res_gz == False:
         return res_gz
     else:
-        return res_gz.json()['Data'][0]
+        res_gz_text = res_gz.text
+        res_gz_text = res_gz_text[res_gz_text.find(
+            '(')+1: res_gz_text.find(')')]
+        if len(res_gz_text) > 0:
+            return json.loads(res_gz_text)
+        else:
+            return False
 
 
 def get_pj(fundCode):
@@ -307,6 +317,8 @@ def dumpcart():
         notification.notify_QMSG(title, content)
     else:
         log.logger.info('停车')
+        notification.notify_QW_AM(title, '无车&不下')
+
 
 if __name__ == '__main__':
     # get_trade_day(5)
