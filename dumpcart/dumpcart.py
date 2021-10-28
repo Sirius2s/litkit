@@ -195,7 +195,7 @@ def get_gm(fundCode):
         temp_gm = re.findall(r"\=(.*?)$", text_gm)
         list_gm = eval(temp_gm[0])
         if len(list_gm) > 0:
-            return list_gm[4][1]
+            return list_gm[len(list_gm)-1][1]
         else:
             return 'x'
 
