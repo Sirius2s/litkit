@@ -45,7 +45,6 @@ def get_trade_day(n):
             if (count == n):  # 过去第n个交易日
                 # print(trade_day.date())
                 return trade_day.date()
-                break
             count = count + 1
 
 
@@ -128,9 +127,35 @@ def get_gz(fundCode):
     else:
         res_gz_text = res_gz.text
         res_gz_text = res_gz_text[res_gz_text.find(
-            '(')+1: res_gz_text.find(')')]
+            '(')+1: res_gz_text.rfind(')')]
         if len(res_gz_text) > 0:
             return json.loads(res_gz_text)
+        else:
+            return False
+
+
+def get_gz_xc(fundCode):
+    """
+    根据代码获取当前所有估值XinCai
+    para: fundCode
+    return: False/Data
+        yes: 昨日净值
+        detail: time,gz *N
+    """
+    url_gz_xc = f'https://app.xincai.com/fund/api/jsonp.json/var%20t1fu_{fundCode}=/XinCaiFundService.getFundYuCeNav'
+    param_gz_xc = {
+        'symbol': fundCode,
+        '___qn': 3
+    }
+    res_gz_xc = req(url_gz_xc, param_gz_xc, header, 'gz_xc')
+    if res_gz_xc == False:
+        return res_gz_xc
+    else:
+        res_gz_xc_text = res_gz_xc.text
+        res_gz_xc_text = res_gz_xc_text[res_gz_xc_text.find(
+            '(')+1: res_gz_xc_text.rfind(')')]
+        if len(res_gz_xc_text) > 0 and res_gz_xc_text != 'null':
+            return json.loads(res_gz_xc_text)
         else:
             return False
 
@@ -236,11 +261,18 @@ def jlj():
         if float(jz[0]['JZZZL']) > 0 or float(jz[1]['JZZZL']) > 0 or float(jz[2]['JZZZL']) > 0:  # 近3天为负则继续后续逻辑
             continue
 
-        gz = get_gz(lj_id)
+        gz = get_gz_xc(lj_id)
+        if gz != False:
+            gz_dtl = list(map(float, gz['detail'].split(",")[1::2]))
+            if sum(gz_dtl)/len(gz_dtl) > float(gz['yes']):
+                gz = False
+
         if gz == False:
-            continue
-        if float(gz['gszzl']) > 0:
-            continue
+            gz = get_gz(lj_id)
+            if gz == False:
+                continue
+            if float(gz['gszzl']) > 0:
+                continue
 
         item = {
             'id': lj_id,
@@ -325,3 +357,4 @@ if __name__ == '__main__':
     # get_trade_day(0)
     # print(get_gm('002601'))
     dumpcart()
+    # print(get_gz_xc('002601'))
