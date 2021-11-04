@@ -264,7 +264,9 @@ def jlj():
         gz = get_gz_xc(lj_id)
         if gz != False:
             gz_dtl = list(map(float, gz['detail'].split(",")[1::2]))
-            if sum(gz_dtl)/len(gz_dtl) > float(gz['yes']):
+            gz_gsz = round(sum(gz_dtl)/len(gz_dtl),4)
+            gz_gszzl = round((gz_gsz-float(gz['yes']))/float(gz['yes']),4)
+            if gz_gszzl > 0:
                 gz = False
 
         if gz == False:
@@ -273,11 +275,13 @@ def jlj():
                 continue
             if float(gz['gszzl']) > 0:
                 continue
+            gz_gsz = gz['gsz']
+            gz_gszzl = gz['gszzl']
 
         item = {
             'id': lj_id,
-            'gz': gz['gsz'],
-            'gzzzl': gz['gszzl'],
+            'gz': gz_gsz,
+            'gzzzl': gz_gszzl,
             'gm': get_gm(lj_id),
             'pj': get_pj(lj_id)
         }
