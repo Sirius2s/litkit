@@ -258,6 +258,9 @@ def jlj():
         jz = get_jz(lj_id)
         if jz == False:
             continue
+        for i in range(0, 3):
+            if jz[i]['JZZZL'] == "":
+                jz[i]['JZZZL'] = 0
         if float(jz[0]['JZZZL']) > 0 or float(jz[1]['JZZZL']) > 0 or float(jz[2]['JZZZL']) > 0:  # 近3天为负则继续后续逻辑
             continue
 
