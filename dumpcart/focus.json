@@ -3,5 +3,10 @@
         "fundcode": "470028",
         "buyin": "3.3",
         "wpoint": "1.01"
+    },
+    {
+        "fundcode": "001307",
+        "buyin": "1.8270",
+        "wpoint": "1.065"
     }
 ]
