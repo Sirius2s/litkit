@@ -129,4 +129,4 @@ dmypy.json
 .pyre/
 *proxychains.conf
 *.ipynb
-*demo.py
+*demo*.py
