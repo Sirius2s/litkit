@@ -10,8 +10,13 @@
         "wpoint": "1.05"
     },
     {
-        "fundcode": "005224",
-        "buyin": "0.8762",
+        "fundcode": "010111",
+        "buyin": "0.5806",
         "wpoint": "1.06"
+    },
+    {
+        "fundcode": "012414",
+        "buyin": "1.0959",
+        "wpoint": "1.08"
     }
 ]
