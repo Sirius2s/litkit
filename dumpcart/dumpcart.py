@@ -886,6 +886,25 @@ def jlj():
     selected_funds_count = 0
     processed_funds_count = 0
     
+
+    # 创建 HTML 表格头部
+    html_table = '''<table style="border-collapse: collapse; width: auto; text-align: left;"><thead><tr style="background-color: #4CAF50; color: white;">
+<th style="border: 1px solid #ddd; padding: 8px 12px; white-space: nowrap; font-weight: bold;">基金代码</th>
+<th style="border: 1px solid #ddd; padding: 8px 12px; white-space: nowrap; font-weight: bold;">基金名称</th>
+<th style="border: 1px solid #ddd; padding: 8px 12px; white-space: nowrap; font-weight: bold;">类型</th>
+<th style="border: 1px solid #ddd; padding: 8px 12px; white-space: nowrap; font-weight: bold;">估算值</th>
+<th style="border: 1px solid #ddd; padding: 8px 12px; white-space: nowrap; font-weight: bold;">增长率 (%)</th>
+<th style="border: 1px solid #ddd; padding: 8px 12px; white-space: nowrap; font-weight: bold;">规模 (亿)</th>
+<th style="border: 1px solid #ddd; padding: 8px 12px; white-space: nowrap; font-weight: bold;">评级</th>
+<th style="border: 1px solid #ddd; padding: 8px 12px; white-space: nowrap; font-weight: bold;">RSI</th>
+<th style="border: 1px solid #ddd; padding: 8px 12px; white-space: nowrap; font-weight: bold;">平均跌幅</th>
+<th style="border: 1px solid #ddd; padding: 8px 12px; white-space: nowrap; font-weight: bold;">综合评分</th>
+<th style="border: 1px solid #ddd; padding: 8px 12px; white-space: nowrap; font-weight: bold;">成立日期</th>
+<th style="border: 1px solid #ddd; padding: 8px 12px; white-space: nowrap; font-weight: bold;">最大回撤</th>
+<th style="border: 1px solid #ddd; padding: 8px 12px; white-space: nowrap; font-weight: bold;">重仓行业</th>
+</tr></thead><tbody>
+'''
+    
     for item in lj_list:
         try:
             lj_id = item.split(",")[0]  # fund id
@@ -1005,35 +1024,38 @@ def jlj():
         # 获取基金名称
         fund_name = get_fund_name(lj_id)
 
-        # 组装基金信息
+        # 组装基金信息到 HTML 表格
         try:
-            item = {
-                'id🎫': lj_id,
-                'name': fund_name,
-                'type': fund_type,
-                'gz': gz_gsz,
-                'zzl': gz_gszzl,
-                'gm': fund_scale,
-                'pj': rating_score,
-                'rsi': rsi if rsi is not None else 'N/A',
-                'fall📉': round(avg_fall, 2),
-                'score🚦': round((avg_fall * -1 + 5) * 0.4 + (rating_score / 5 * 3) * 0.6, 2),  # 综合推荐分数
-                'clrq': establish_date.strftime('%Y-%m-%d'),
-                'zdhc': f'{round(max_drawdown, 2)}%',
-                'hy': ','.join(sectors) if sectors else 'N/A'
-            }
-            content = content + str(item) + '\n'
-            content = content.replace('{', '').replace('}', '').replace("'", '')
+            row_bg_color = '#f2f2f2' if selected_funds_count % 2 == 0 else '#ffffff'
+            html_table += f'''<tr style="background-color: {row_bg_color};">
+<td style="border: 1px solid #ddd; padding: 8px 12px; white-space: nowrap;">{lj_id}</td>
+<td style="border: 1px solid #ddd; padding: 8px 12px; white-space: nowrap;">{fund_name}</td>
+<td style="border: 1px solid #ddd; padding: 8px 12px; white-space: nowrap;">{fund_type}</td>
+<td style="border: 1px solid #ddd; padding: 8px 12px; white-space: nowrap;">{gz_gsz}</td>
+<td style="border: 1px solid #ddd; padding: 8px 12px; white-space: nowrap;">{round(float(gz_gszzl), 2)}</td>
+<td style="border: 1px solid #ddd; padding: 8px 12px; white-space: nowrap;">{fund_scale}</td>
+<td style="border: 1px solid #ddd; padding: 8px 12px; white-space: nowrap;">{rating_score}</td>
+<td style="border: 1px solid #ddd; padding: 8px 12px; white-space: nowrap;">{rsi if rsi is not None else 'N/A'}</td>
+<td style="border: 1px solid #ddd; padding: 8px 12px; white-space: nowrap;">{round(avg_fall, 2)}</td>
+<td style="border: 1px solid #ddd; padding: 8px 12px; white-space: nowrap;">{round((avg_fall * -1 + 5) * 0.4 + (rating_score / 5 * 3) * 0.6, 2)}</td>
+<td style="border: 1px solid #ddd; padding: 8px 12px; white-space: nowrap;">{establish_date.strftime('%Y-%m-%d')}</td>
+<td style="border: 1px solid #ddd; padding: 8px 12px; white-space: nowrap;">{round(max_drawdown, 2)}%</td>
+<td style="border: 1px solid #ddd; padding: 8px 12px; white-space: nowrap;">{','.join(sectors) if sectors else 'N/A'}</td>
+</tr>
+'''
             selected_funds_count += 1
         except Exception as e:
             log.logger.warning(f"组装基金信息时出错 {lj_id}: {e}")
             continue
 
+    # 完成 HTML 表格
+    html_table += '''</tbody></table>'''
+    
     log.logger.info(f"处理了{processed_funds_count}个基金，选中{selected_funds_count}个基金")
     
-    if len(content) > 0:
-        content = f'今日关注：\n{content}\n'
-        log.logger.info(content)
+    if selected_funds_count > 0:
+        content = f'<div style="font-size: 18px; font-weight: bold; margin-bottom: 8px;">今日关注：</div>{html_table}'
+        log.logger.info("已生成推荐基金 HTML 表格")
     else:
         log.logger.info('无车')
 
@@ -1223,6 +1245,16 @@ def watcher():
     processed_count = 0
     alert_count = 0
     
+    # 创建下车基金 HTML 表格数据
+    sell_html_table = '''<table style="border-collapse: collapse; width: auto; text-align: left;"><thead><tr style="background-color: #f44336; color: white;">
+<th style="border: 1px solid #ddd; padding: 8px 12px; white-space: nowrap; font-weight: bold;">基金代码</th>
+<th style="border: 1px solid #ddd; padding: 8px 12px; white-space: nowrap; font-weight: bold;">当前估值</th>
+<th style="border: 1px solid #ddd; padding: 8px 12px; white-space: nowrap; font-weight: bold;">买入价格</th>
+<th style="border: 1px solid #ddd; padding: 8px 12px; white-space: nowrap; font-weight: bold;">获利比例 (%)</th>
+<th style="border: 1px solid #ddd; padding: 8px 12px; white-space: nowrap; font-weight: bold;">阈值价格</th>
+</tr></thead><tbody>
+'''
+    
     for item_fs in json_fs:
         processed_count += 1
         try:
@@ -1252,24 +1284,27 @@ def watcher():
                 if current_price > threshold_price:
                     # 计算获利比例
                     profit_ratio = (current_price - buyin_price) / buyin_price * 100
-                    content_x += f"{item_fs['fundcode']}: {gz['gsz']} (获利 {profit_ratio:.2f}%)\n"
+                    sell_html_table += f'''<tr style="background-color: {'#ffebee' if alert_count % 2 == 0 else '#ffffff'};">
+<td style="border: 1px solid #ddd; padding: 8px 12px; white-space: nowrap;">{item_fs['fundcode']}</td>
+<td style="border: 1px solid #ddd; padding: 8px 12px; white-space: nowrap;">{gz['gsz']}</td>
+<td style="border: 1px solid #ddd; padding: 8px 12px; white-space: nowrap;">{buyin_price}</td>
+<td style="border: 1px solid #ddd; padding: 8px 12px; white-space: nowrap;">{round(profit_ratio, 2)}</td>
+<td style="border: 1px solid #ddd; padding: 8px 12px; white-space: nowrap;">{round(threshold_price, 4)}</td>
+</tr>
+'''
                     alert_count += 1
-                    log.logger.info(f"基金{item_fs['fundcode']}触发下车预警: 当前价{gz['gsz']} > 阈值{threshold_price:.4f} (获利 {profit_ratio:.2f}%)")
-            except ValueError as e:
-                log.logger.error(f"数值转换错误，基金{item_fs['fundcode']}: {e}")
-                continue
-            except ZeroDivisionError as e:
-                log.logger.error(f"计算获利比例时发生除零错误，基金{item_fs['fundcode']}: {e}")
+            except ValueError:
+                log.logger.warning(f"解析基金{item_fs['fundcode']}数据时出错: {e}")
                 continue
         except Exception as e:
-            log.logger.error(f"处理基金{item_fs.get('fundcode', 'unknown')}时发生异常: {e}")
+            log.logger.error(f"处理关注列表项时出错：{e}")
             continue
 
-    log.logger.info(f"完成关注列表处理，总计{processed_count}个基金，{alert_count}个触发预警")
-
-    if len(content_x) > 0:
-        content_x = f'下车：\n{content_x}\n'
-        log.logger.info(content_x)
+    sell_html_table += '''</tbody></table>'''
+    
+    if alert_count > 0:
+        content_x = f'<div style="font-size: 18px; font-weight: bold; margin: 15px 0 8px 0;">下车：</div>{sell_html_table}'
+        log.logger.info("已生成下车 HTML 表格")
         content = content + content_x
     else:
         log.logger.info('无下车信号')
@@ -1289,9 +1324,10 @@ def dumpcart():
     watcher()
 
     if len(content) > 0:
+        # 直接发送HTML表格内容，无需完整HTML页面结构
         notification.notify_QW_AM(title, content)
         notification.notify_QMSG(title, content)
-        log.logger.info("已发送通知")
+        log.logger.info("已发送HTML表格通知")
     else:
         log.logger.info('无符合条件的基金，不发送通知')
         notification.notify_QW_AM(title, '无车&不下')

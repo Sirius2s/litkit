@@ -129,7 +129,13 @@ def qywxamNotify(title, content):
     # 获取token结束
 
     # 准备数据开始
-    html = content.replace('\n', "<br/>")
+    # 只有当内容不是 HTML 时才转换换行符为<br/>
+    if '<table' in content or '<tr' in content or '<td' in content:
+        # 如果内容已经是 HTML 格式，保持原样
+        html = content
+    else:
+        # 如果是纯文本，转换换行符为<br/>
+        html = content.replace('\n', "<br/>")
     options_textcard = {
         'url': f'https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token={accesstoken}',
         'json': {
